@@ -1,8 +1,19 @@
 package com.example.gas.entities;
 
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "Owner")
 public class Owner {
@@ -11,67 +22,25 @@ public class Owner {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name")
-    private String Name;
+    @Column(name = "name",nullable = false)
+    private String name;
 
-    @Column(name = "surname")
-    private String Surname;
+    @Column(name = "surname",nullable = false)
+    private String surname;
 
-    @Column(name = "email")
+    @NotNull
+    @Column(name = "email", unique = true,nullable = false)
+    @Email
     private String email;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
     Address address;
 
-    public Owner() {
-    }
-
-    public Owner(Long id, String name, String surname, String email, Address address) {
-        this.id = id;
-        Name = name;
-        Surname = surname;
+    public Owner(String name, String surname, String email, Address address) {
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.address = address;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getSurname() {
-        return Surname;
-    }
-
-    public void setSurname(String surname) {
-        Surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

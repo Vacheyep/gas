@@ -1,7 +1,14 @@
 package com.example.gas.entities;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table
 public class CheckStation {
@@ -10,44 +17,15 @@ public class CheckStation {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "special_code")
+    @Column(name = "special_code",nullable = false , unique = true)
     String specialCode;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
     Address address;
 
-
-    public CheckStation() {
-    }
-
-    public CheckStation(Long id, String specialCode, Address address) {
-        this.id = id;
+    public CheckStation(String specialCode, Address address) {
         this.specialCode = specialCode;
-        this.address = address;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSpecialCode() {
-        return specialCode;
-    }
-
-    public void setSpecialCode(String specialCode) {
-        this.specialCode = specialCode;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
         this.address = address;
     }
 }

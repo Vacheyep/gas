@@ -2,9 +2,15 @@ package com.example.gas.entities;
 
 
 import com.example.gas.entities.enums.Role;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -16,27 +22,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User() {
-    }
-
-    public User(Long id, Role role) {
-        this.id = id;
-        this.role = role;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
+    public User(Role role) {
         this.role = role;
     }
 }
